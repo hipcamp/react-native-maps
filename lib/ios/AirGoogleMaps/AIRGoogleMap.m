@@ -249,15 +249,18 @@ id regionAsJSON(MKCoordinateRegion region) {
 
   if (_initialCamera != nil) {
     self.camera = _initialCamera;
-  }
-  else if (_initialRegion.span.latitudeDelta != 0.0 &&
+  } else if (_initialRegion.span.latitudeDelta != 0.0 &&
       _initialRegion.span.longitudeDelta != 0.0) {
     self.camera = [AIRGoogleMap makeGMSCameraPositionFromMap:self andMKCoordinateRegion:_initialRegion];
   } else if (_region.span.latitudeDelta != 0.0 &&
       _region.span.longitudeDelta != 0.0) {
     self.camera = [AIRGoogleMap makeGMSCameraPositionFromMap:self andMKCoordinateRegion:_region];
   }
-
+  
+  if (self.camera != nil) {
+      _initialCameraSetOnLoad = true;
+  }
+  
   [super didMoveToWindow];
 }
 
